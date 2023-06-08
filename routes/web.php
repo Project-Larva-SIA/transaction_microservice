@@ -16,3 +16,20 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+// transaction routes
+
+$router->get('/transaction','TransactionController@getTransaction');
+$router->get('/transaction/{TransactionID}','TransactionController@showTransaction');
+$router->post('/transaction','TransactionController@addTransaction');
+$router->put('/transaction/{TransactionID}','TransactionController@updateTransaction');
+$router->delete('/transaction/{TransactionID}','TransactionController@deleteTransaction');
+
+// invoice routes
+
+$router->get('/invoice','InvoicesController@getInvoices');
+// $router->get('/invoice/{BidID}', 'BidsController@show');
+$router->get('/invoice/{InvoiceID}','InvoicesController@showInvoices');
+$router->post('/invoice','InvoicesController@addInvoices');
+$router->put('/invoice/{InvoiceID}','InvoicesController@updateInvoices');
+$router->delete('/invoice/{InvoiceID}','InvoicesController@deleteInvoices');
