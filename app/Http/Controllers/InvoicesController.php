@@ -14,51 +14,19 @@ public function __construct(Request $request){
     $this->request = $request;
 }
 
-public function getInvoices(){
-
-$invoices = Invoice::all();
-
-return $this->successResponse($invoices, Response::HTTP_OK);
-
-}
-
-// public function show($BidID)
-// {
-//     $specificData = Bids::find($BidID);
-
-//     if (!$specificData) {
-//         return response()->json(['message' => 'Bid not found'], 404);
-//     }
-
-//     $bidderId = $specificData->BidderID;
-//     $bidAmount = $specificData->BidAmount;
-//     $itemId = $specificData->ItemID;
-
-//     // Fetch the ItemName based on the ItemID
-//     $item = Items::find($itemId);
-//     $itemName = $item ? $item->ItemName : null;
-
-//     return response()->json(['BidderID' => $bidderId, 'BidAmount' => $bidAmount, 'ItemName' => $itemName]);
-// }
-
-
 
 public function index()
 {
-
     $invoices = Invoice::all();
     return $this->successResponse($invoices);
 }
-public function addTransaction(Request $request ){
-
+public function addInvoice(Request $request ){
+    
     $rules = [
-
-    'InvoiceID' => 'required',
     'UserID' => 'required',
     'ItemID' => 'required',
     'Amount' => 'required',
     'TransactionID' => 'required',
-
     ];
 
     $this->validate($request,$rules);
@@ -74,32 +42,6 @@ public function showInvoices($InvoiceID)
 
 }
 
-public function updateInvoices(Request $request,$InvoiceID)
-{
-        
-    $rules = [
-
-    'InvoiceID' => 'required',
-    'UserID' => 'required',
-    'ItemID' => 'required',
-    'Amount' => 'required',
-    'TransactionID' => 'required',
-    
-];
-
-    $this->validate($request, $rules);
-    $invoices = Invoice::findOrFail($InvoiceID);
-    $invoices->fill($request->all());
-
-    // if no changes happen
-    if ($invoices->isClean()) {
-    return $this->errorResponse('At least one value must change', Response::HTTP_UNPROCESSABLE_ENTITY);
-    }
-
-    $invoices->save();
-    return $this->successResponse($invoices);
-
-}
 
 public function deleteInvoices($InvoiceID)
 {

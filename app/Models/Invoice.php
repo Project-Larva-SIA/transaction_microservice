@@ -12,7 +12,6 @@ public $primaryKey = 'InvoiceID';
 
 public $timestamps = false;
 
-protected $fillable = [
-    'InvoiceID', 'UserID', 'ItemID', 'Amount', 'TransactionID', 'invoiceTime'
-];
+protected $fillable = [ 'InvoiceID', 'UserID', 'ItemID', 'Amount', 'TransactionID', 'invoiceTime'];
+
 }

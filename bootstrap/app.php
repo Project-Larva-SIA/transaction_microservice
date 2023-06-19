@@ -80,6 +80,10 @@ $app->configure('app');
 //     'auth' => App\Http\Middleware\Authenticate::class,
 // ]);
 
+$app->middleware([App\Http\Middleware\AuthenticateAccess::class, ]); // New -> access the AuthenticateAccess Middleware
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers

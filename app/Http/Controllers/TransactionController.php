@@ -15,35 +15,6 @@ public function __construct(Request $request){
     $this->request = $request;
 }
 
-public function getTransaction(){
-
-$transaction = Transaction::all();
-
-return $this->successResponse($transaction, Response::HTTP_OK);
-
-}
-
-// public function show($BidID)
-// {
-//     $specificData = Bids::find($BidID);
-
-//     if (!$specificData) {
-//         return response()->json(['message' => 'Bid not found'], 404);
-//     }
-
-//     $bidderId = $specificData->BidderID;
-//     $bidAmount = $specificData->BidAmount;
-//     $itemId = $specificData->ItemID;
-
-//     // Fetch the ItemName based on the ItemID
-//     $item = Items::find($itemId);
-//     $itemName = $item ? $item->ItemName : null;
-
-//     return response()->json(['BidderID' => $bidderId, 'BidAmount' => $bidAmount, 'ItemName' => $itemName]);
-// }
-
-
-
 public function index()
 {
 
@@ -75,32 +46,6 @@ public function showTransaction($TransactionID)
 
 }
 
-public function updateTransaction(Request $request,$TransactionID)
-{
-        
-    $rules = [
-
-    'TransactionID' => 'required',
-    'ItemID' => 'required',
-    'SellerID' => 'required',
-    'BuyerID' => 'required',
-    'TransactionAmount' => 'required',
-    
-];
-
-    $this->validate($request, $rules);
-    $transaction = Transaction::findOrFail($TransactionID);
-    $transaction->fill($request->all());
-
-    // if no changes happen
-    if ($transaction->isClean()) {
-    return $this->errorResponse('At least one value must change', Response::HTTP_UNPROCESSABLE_ENTITY);
-    }
-
-    $transaction->save();
-    return $this->successResponse($transaction);
-
-}
 
 public function deleteTransaction($TransactionID)
 {
